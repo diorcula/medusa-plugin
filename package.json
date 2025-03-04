@@ -19,6 +19,31 @@
       "import": "./src/exports/rsc.ts",
       "types": "./src/exports/rsc.ts",
       "default": "./src/exports/rsc.ts"
+    },
+    "./components/CustomAdminUI": {
+      "import": "./src/components/CustomAdminUI.tsx",
+      "types": "./src/components/CustomAdminUI.tsx",
+      "default": "./src/components/CustomAdminUI.tsx"
+    },
+    "./components/ManageProducts": {
+      "import": "./src/components/ManageProducts.tsx",
+      "types": "./src/components/ManageProducts.tsx",
+      "default": "./src/components/ManageProducts.tsx"
+    },
+    "./components/ShippingProfiles": {
+      "import": "./src/components/ShippingProfiles.tsx",
+      "types": "./src/components/ShippingProfiles.tsx",
+      "default": "./src/components/ShippingProfiles.tsx"
+    },
+    "./components/ListProducts": {
+      "import": "./src/components/ListProducts.tsx",
+      "types": "./src/components/ListProducts.tsx",
+      "default": "./src/components/ListProducts.tsx"
+    },
+    "./utils/medusa-config": {
+      "import": "./src/utils/medusa-config.ts",
+      "types": "./src/utils/medusa-config.ts",
+      "default": "./src/utils/medusa-config.ts"
     }
   },
   "main": "./src/index.ts",
@@ -55,7 +80,6 @@
     "@swc/jest": "^0.2.37",
     "@types/jest": "29.5.12",
     "@types/node": "^22.5.4",
-    "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
     "copyfiles": "2.4.1",
     "cross-env": "^7.0.3",
@@ -74,7 +98,11 @@
     "rimraf": "3.0.2",
     "sharp": "0.32.6",
     "sort-package-json": "^2.10.0",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "@medusajs/js-sdk": "^2.6.0",
+    "@medusajs/types": "^2.6.0",
+    "@tanstack/react-query": "^5.67.1",
+    "@types/react": "^19.0.10"
   },
   "peerDependencies": {
     "payload": "^3.17.1"
@@ -109,5 +137,11 @@
       "sharp"
     ]
   },
-  "registry": "https://registry.npmjs.org/"
+  "registry": "https://registry.npmjs.org/",
+  "dependencies": {
+    "@medusajs/js-sdk": "^2.6.0",
+    "@medusajs/types": "^2.6.0",
+    "@tanstack/react-query": "^5.67.1",
+    "@types/react": "^19.0.10"
+  }
 }

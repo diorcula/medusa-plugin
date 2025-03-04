@@ -1,6 +1,6 @@
 import type { CollectionSlug, Config } from 'payload'
 
-export type MedusaPluginConfig = {
+export type PayloadMedusaPluginConfig = {
   /**
    * List of collections to add a custom field
    */
@@ -8,9 +8,12 @@ export type MedusaPluginConfig = {
   disabled?: boolean
 }
 
-export const medusaPlugin =
-  (pluginOptions: MedusaPluginConfig) =>
-  (config: Config): Config => {
+export const payloadMedusaPlugin =
+  (pluginOptions: PayloadMedusaPluginConfig) =>
+  (incomingConfig: Config): Config => {
+    // create copy of incoming config
+    let config = { ...incomingConfig }
+
     if (!config.collections) {
       config.collections = []
     }
@@ -43,10 +46,6 @@ export const medusaPlugin =
       }
     }
 
-    /**
-     * If the plugin is disabled, we still want to keep added collections/fields so the database schema is consistent which is important for migrations.
-     * If your plugin heavily modifies the database schema, you may want to remove this property.
-     */
     if (pluginOptions.disabled) {
       return config
     }
@@ -67,12 +66,8 @@ export const medusaPlugin =
       config.admin.components.beforeDashboard = []
     }
 
-    config.admin.components.beforeDashboard.push(
-      `medusa-plugin/client#BeforeDashboardClient`,
-    )
-    config.admin.components.beforeDashboard.push(
-      `medusa-plugin/rsc#BeforeDashboardServer`,
-    )
+    config.admin.components.beforeDashboard.push(`medusa-plugin/client#BeforeDashboardClient`)
+    config.admin.components.beforeDashboard.push(`medusa-plugin/rsc#BeforeDashboardServer`)
 
     config.endpoints.push({
       handler: () => {
@@ -109,5 +104,24 @@ export const medusaPlugin =
       }
     }
 
+    // Add the custom admin UI component as a view
+    config.admin = {
+      ...config.admin,
+      components: {
+        ...config.admin?.components,
+        // afterNavLinks: ['src/components/afterNavLinks/LinkToCustomView.tsx'],
+        views: {
+          ...config.admin?.components?.views,
+          myCustomView: {
+            Component: 'medusa-plugin/components/CustomAdminUI#CustomAdminUI', // This is the path to the view component
+            path: '/medusa-plugin', // This is the path where the view will be accessible in the admin: admin/medusa-products
+          },
+        },
+      },
+    }
+
+    // Finally, return the modified config
     return config
   }
+
+export default payloadMedusaPlugin

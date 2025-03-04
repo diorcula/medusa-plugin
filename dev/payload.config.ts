@@ -2,7 +2,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
-import { medusaPlugin } from 'medusa-plugin'
+import { payloadMedusaPlugin } from 'medusa-plugin'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
@@ -46,7 +46,7 @@ export default buildConfig({
     await seed(payload)
   },
   plugins: [
-    medusaPlugin({
+    payloadMedusaPlugin({
       collections: {
         posts: true,
       },
