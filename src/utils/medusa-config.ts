@@ -12,6 +12,4 @@ const config: Config = {
 }
 
 // Create an instance of the Medusa class with the config object
-const sdk = new Medusa(config)
-
-export default sdk
+export const sdk = new Medusa(config)
