@@ -16,6 +16,7 @@ export const CustomAdminUI: React.FC<AdminViewProps> = () => {
       <Gutter>
         <div>
           <h1>Medusa Dashboard</h1>
+          <br />
           <ManageProducts />
           <ShippingProfiles />
         </div>

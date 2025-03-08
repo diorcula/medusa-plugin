@@ -15,6 +15,8 @@ import { fileURLToPath } from 'url'
 
 import { NextRESTClient } from './helpers/NextRESTClient.js'
 
+import sdk from '../src/utils/medusa-config.ts'
+
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
 let payload: Payload
@@ -86,5 +88,25 @@ describe('Plugin tests', () => {
     const { docs } = await payload.find({ collection: 'plugin-collection' })
 
     expect(docs).toHaveLength(1)
+  })
+
+  // Test custom admin UI
+  it('should have the custom view path added by the plugin', () => {
+    const customView = payload.config.admin.components.views.myCustomView
+    expect(customView).toBeDefined()
+    expect(customView.Component).toBe('medusa-plugin/components/CustomAdminUI#CustomAdminUI')
+    expect(customView.path).toBe('/medusa-plugin')
+  })
+
+  // Test integration with Medusa SDK
+  it('should fetch a list of products with the ListProducts component', async () => {
+    try {
+      const response = await sdk.admin.products.list()
+      expect(response.status).toBe(200)
+      console.log('Fetched products from Medusa:', response.data)
+    } catch (error) {
+      console.error('Failed to fetch products from Medusa', error)
+      throw error
+    }
   })
 })

@@ -1,26 +1,26 @@
-'use client';
+'use client'
 
-import React, { useEffect, useState } from 'react';
-import { Gutter, Table, Column } from '@payloadcms/ui';
-import sdk from '../utils/medusa-config.ts';
+import React, { useEffect, useState } from 'react'
+import { Gutter, Table, Column } from '@payloadcms/ui'
+import { sdk } from '../utils/medusa-config.ts'
 
 export const ShippingProfiles: React.FC = () => {
-  const [shippingProfiles, setShippingProfiles] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [shippingProfiles, setShippingProfiles] = useState<any[]>([])
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchShippingProfiles = async () => {
       try {
-        const response = await sdk.admin.shippingProfile.list();
-        setShippingProfiles(response.shipping_profiles);
+        const response = await sdk.admin.shippingProfile.list()
+        setShippingProfiles(response.shipping_profiles)
       } catch (error) {
-        console.error('Error fetching shipping profiles:', error);
-        setError('Error fetching shipping profiles');
+        console.error('Error fetching shipping profiles:', error)
+        setError('Error fetching shipping profiles')
       }
-    };
+    }
 
-    fetchShippingProfiles();
-  }, []);
+    fetchShippingProfiles()
+  }, [])
 
   const columns: Column[] = [
     {
@@ -37,7 +37,7 @@ export const ShippingProfiles: React.FC = () => {
       Heading: 'Profile Name',
       renderedCells: shippingProfiles.map((profile) => <div key={profile.id}>{profile.name}</div>),
     },
-  ];
+  ]
 
   return (
     <Gutter>
@@ -51,7 +51,7 @@ export const ShippingProfiles: React.FC = () => {
         )}
       </div>
     </Gutter>
-  );
-};
+  )
+}
 
 // export default ShippingProfiles;
