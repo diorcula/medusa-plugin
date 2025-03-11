@@ -1,3 +1,4 @@
+/* eslint-disable perfectionist/sort-objects */
 /* eslint-disable no-console */
 /**
  * Here are your integration tests for the plugin.
@@ -6,15 +7,12 @@
  */
 
 import type { Payload } from 'payload'
+
 import { MongoMemoryReplSet } from 'mongodb-memory-server'
-import path from 'path'
 import { getPayload } from 'payload'
-import { fileURLToPath } from 'url'
-import { NextRESTClient } from './helpers/NextRESTClient.js'
 
 import { sdk } from '../src/utils/medusa-config'
-
-const dirname = path.dirname(fileURLToPath(import.meta.url))
+import { NextRESTClient } from './helpers/NextRESTClient.js'
 
 let payload: Payload
 let restClient: NextRESTClient
@@ -96,12 +94,13 @@ describe('Medusa Admin UI Integration Tests', () => {
 describe('Medusa Admin User Authentication Integration Tests', () => {
   it('should log an admin user in to Medusa', async () => {
     try {
-      await sdk.auth.login('user', 'emailpass', {
+      const response = await sdk.auth.login('user', 'emailpass', {
         email: 'medusa-payload-prototype@instance.studio',
         password: 'o4Qf@xYTRbjDQrVU4',
       })
 
       console.log('Admin user logged in successfully')
+      expect(response).toHaveProperty('token')
     } catch (error) {
       console.error('Failed to log in admin user:', error)
       throw error
@@ -165,8 +164,4 @@ describe('Medusa Product Management Integration Tests', () => {
       throw error
     }
   })
-})
-
-describe('ListProducts Component Integration Tests', () => {
-  it('should fetch a list of products with the ListProducts Component', async () => {})
 })
