@@ -8,4 +8,3 @@ const config: Config = {
 }
 // Create an instance of the Medusa class with the config object
 export const sdk = new Medusa(config)
-console.log('medusa-config ----------->: ', sdk)

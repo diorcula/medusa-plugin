@@ -1,3 +1,7 @@
+import dotenv from 'dotenv'
+
+dotenv.config({ path: './dev/.env' })
+
 const esModules = [
   // file-type and all dependencies: https://github.com/sindresorhus/file-type
   'file-type',

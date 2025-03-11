@@ -6,16 +6,13 @@
  */
 
 import type { Payload } from 'payload'
-import dotenv from 'dotenv'
 import { MongoMemoryReplSet } from 'mongodb-memory-server'
 import path from 'path'
 import { getPayload } from 'payload'
 import { fileURLToPath } from 'url'
 import { NextRESTClient } from './helpers/NextRESTClient.js'
 
-import { sdk } from '../src/utils/medusa-config.ts'
-// import Medusa from '@medusajs/js-sdk'
-// let sdk: Medusa
+import { sdk } from '../src/utils/medusa-config'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -25,23 +22,6 @@ let memoryDB: MongoMemoryReplSet | undefined
 
 describe('Plugin tests', () => {
   beforeAll(async () => {
-    dotenv.config({
-      path: path.resolve(dirname, './.env'),
-    })
-
-    // Log environment variables to verify they are loaded correctly
-    console.log('MEDUSA_BACKEND_URL:', process.env.MEDUSA_BACKEND_URL)
-    console.log('NEXT_PUBLIC_MEDUSA_API_SECRET:', process.env.NEXT_PUBLIC_MEDUSA_API_SECRET)
-
-    // Initialize a new Medusa SDK for testing
-    // sdk = new Medusa({
-    //   baseUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000', // Replace with your Medusa backend URL
-    //   debug: process.env.NODE_ENV === 'test',
-    //   apiKey: process.env.NEXT_PUBLIC_MEDUSA_API_SECRET,
-    // })
-
-    console.log('sdk------->', sdk.admin.apiKey)
-
     process.env.DISABLE_PAYLOAD_HMR = 'true'
     process.env.PAYLOAD_DROP_DATABASE = 'true'
 
@@ -185,4 +165,8 @@ describe('Medusa Product Management Integration Tests', () => {
       throw error
     }
   })
+})
+
+describe('ListProducts Component Integration Tests', () => {
+  it('should fetch a list of products with the ListProducts Component', async () => {})
 })
