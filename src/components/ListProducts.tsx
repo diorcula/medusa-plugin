@@ -9,7 +9,7 @@ import { AdminProduct } from '@medusajs/types'
 // query function
 const fetchProducts = async () => {
   const response = await sdk.admin.product.list()
-  console.log('API Response:', response) // Log the API response
+  console.log('fetch product.list() -> API Response:', response) // Log the API response
   return response.products
 }
 
