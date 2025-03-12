@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { Gutter, Table, Column } from '@payloadcms/ui'
-import { sdk } from '../utils/medusa-config.ts'
+import { sdk } from '../utils/medusaSDK.ts'
 
 export const ShippingProfiles: React.FC = () => {
   const [shippingProfiles, setShippingProfiles] = useState<any[]>([])

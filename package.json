@@ -45,10 +45,10 @@
       "types": "./src/components/afterNavLinks/LinkToCustomView.tsx",
       "default": "./src/components/afterNavLinks/LinkToCustomView.tsx"
     },
-    "./utils/medusa-config": {
-      "import": "./src/utils/medusa-config.ts",
-      "types": "./src/utils/medusa-config.ts",
-      "default": "./src/utils/medusa-config.ts"
+    "./utils/medusaSDK": {
+      "import": "./src/utils/medusaSDK.ts",
+      "types": "./src/utils/medusaSDK.ts",
+      "default": "./src/utils/medusaSDKg.ts"
     }
   },
   "main": "./src/index.ts",

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { sdk } from '../utils/medusa-config.ts'
+import { sdk } from '../utils/medusaSDK.ts'
 import { Gutter, Button, TextInput } from '@payloadcms/ui'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ListProducts } from './ListProducts.tsx'

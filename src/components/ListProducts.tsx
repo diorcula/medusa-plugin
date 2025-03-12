@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { sdk } from '../utils/medusa-config.ts'
+import { sdk } from '../utils/medusaSDK.ts'
 import { Gutter, Table, Column, Button, XIcon } from '@payloadcms/ui'
 import { useQuery } from '@tanstack/react-query'
 import { AdminProduct } from '@medusajs/types'
