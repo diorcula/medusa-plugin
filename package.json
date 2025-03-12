@@ -40,6 +40,11 @@
       "types": "./src/components/ListProducts.tsx",
       "default": "./src/components/ListProducts.tsx"
     },
+    "./components/afterNavLinks/LinkToCustomView": {
+      "import": "./src/components/afterNavLinks/LinkToCustomView.tsx",
+      "types": "./src/components/afterNavLinks/LinkToCustomView.tsx",
+      "default": "./src/components/afterNavLinks/LinkToCustomView.tsx"
+    },
     "./utils/medusa-config": {
       "import": "./src/utils/medusa-config.ts",
       "types": "./src/utils/medusa-config.ts",

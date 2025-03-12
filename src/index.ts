@@ -109,7 +109,7 @@ export const payloadMedusaPlugin =
       ...config.admin,
       components: {
         ...config.admin?.components,
-        // afterNavLinks: ['src/components/afterNavLinks/LinkToCustomView.tsx'],
+        afterNavLinks: ['medusa-plugin/components/afterNavLinks/LinkToCustomView'],
         views: {
           ...config.admin?.components?.views,
           myCustomView: {
