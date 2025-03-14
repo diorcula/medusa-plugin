@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18, 20]
+        node-version: [20]
 
     steps:
       - name: Checkout repository
@@ -36,11 +36,32 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      #   - name: Run lint
-      #     run: npm run lint
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and run Docker Compose
+        run: |
+          docker-compose up -d
+          docker-compose exec medusa npm install
+          docker-compose exec medusa medusa migrations run
+
+      - name: Wait for Medusa to be ready
+        run: |
+          # Wait for Medusa to be ready
+          timeout 60s bash -c 'until echo > /dev/tcp/localhost/9000; do sleep 1; done'
+
+      - name: Run lint
+        run: npm run lint
 
       - name: Run type check
         run: npm run type-check
 
-      - name: Run tests
+      - name: Run Payload Medusa Plugin integration tests
         run: npm test
+
+      - name: Run Medusa tests
+        run: docker-compose exec medusa npm test
+
+      - name: Shut down Docker Compose
+        if: always()
+        run: docker-compose down
