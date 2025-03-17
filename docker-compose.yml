@@ -7,14 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
       POSTGRES_DB: medusa-my-medusa-store
-
-  medusa:
-    build:
-      context: .
-      dockerfile: Dockerfile.medusa
     ports:
-      - '9000:9000'
-    depends_on:
-      - postgres
-    environment:
-      DATABASE_URL: postgres://postgres:mysecretpassword@postgres:5432/medusa-my-medusa-store
+      - '5433:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
