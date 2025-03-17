@@ -1,0 +1,22 @@
+FROM node:20-alpine AS base
+
+FROM base AS builder
+
+WORKDIR /app
+
+COPY ./dev/medusa/my-medusa-store/ .
+
+RUN npm install
+RUN npm run build
+
+FROM base AS final
+
+WORKDIR /app
+
+COPY --from=builder /app /app
+
+EXPOSE 9000
+
+RUN npm run predeploy
+
+CMD ["npm", "start"]

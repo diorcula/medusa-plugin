@@ -1,0 +1,20 @@
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: medusa-my-medusa-store
+
+  medusa:
+    build:
+      context: .
+      dockerfile: Dockerfile.medusa
+    ports:
+      - '9000:9000'
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:mysecretpassword@postgres:5432/medusa-my-medusa-store
