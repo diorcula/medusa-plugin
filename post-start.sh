@@ -1,20 +1,20 @@
 #!/bin/sh
 
 # Create an admin user, note that the 'medusa-plugin-medusa-1' is the container name and might vary
-docker exec -it medusa-plugin-medusa-1 npx medusa user -e admin-5@medusa-test.com -p supersecret
+docker exec -it medusa-plugin-medusa-1 npx medusa user -e admin@medusa-test.com -p supersecret
 
 # Log in with the created user to get a token
 TOKEN=$(curl -s -X POST 'http://localhost:9000/auth/user/emailpass' \
           -H 'Content-Type: application/json' \
           --data-raw '{
-          "email": "admin-5@medusa-test.com",
+          "email": "admin@medusa-test.com",
           "password": "supersecret"
       }' | jq -r '.token')
 
 # echo token
 echo "token is: $TOKEN"
 
-sleep 5
+sleep 5 # wait to make sure the token is set
 
 # List current API keys
 CURRENT_API_KEYS=$(curl -s -X GET 'http://localhost:9000/admin/api-keys' \
